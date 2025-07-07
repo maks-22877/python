@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Food Boutique</title>
   <link rel="stylesheet" href="./css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
 </head>
+
 <body>
   <!-- Header -->
   <header class="header">
@@ -14,9 +17,11 @@
       <nav>
         <ul class="nav-list">
           <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Contact</a></li>
         </ul>
       </nav>
-      <button class="cart-button">Cart (3)</button>
+      <button class="cart-button">Cart (0)</button>
     </div>
   </header>
 
@@ -24,7 +29,8 @@
   <section class="hero">
     <div class="container">
       <h1 class="hero-title">Welcome to the <span>Food</span> Boutique!</h1>
-      <p class="hero-subtitle">With Food Boutique, you're not just subscribing to food, you're signing up for a fresher, fitter, and happier you.</p>
+      <p class="hero-subtitle">With Food Boutique, you're not just subscribing to food, you're signing up for a fresher,
+        fitter, and happier you.</p>
       <div class="hero-image">
         <img src="https://via.placeholder.com/800x300" alt="Fresh Food">
         <div class="badge">Organic Food</div>
@@ -34,26 +40,72 @@
 
   <!-- Filters -->
   <section class="filters container">
-    <input type="text" placeholder="Search for anything">
-    <select>
-      <option>Categories</option>
-    </select>
-    <select>
-      <option>A to Z</option>
-    </select>
+    <input id="searchInput" type="text" placeholder="Search for anything">
+
+    <div class="select-wrap">
+      <select id="categoryFilter">
+        <option value="all">All categories</option>
+        <option value="fruits">Fruits</option>
+        <option value="vegetables">Vegetables</option>
+        <option value="meat">Meat</option>
+      </select>
+    </div>
+
+    <div class="select-wrap">
+      <select id="sortSelect">
+        <option value="az">A to Z</option>
+        <option value="za">Z to A</option>
+        <option value="priceLowHigh">Price: Low to High</option>
+        <option value="priceHighLow">Price: High to Low</option>
+      </select>
+    </div>
   </section>
 
-  <!-- Products Grid -->
+  <!-- Products Section -->
   <section class="products container">
     <div class="products-grid">
-      <!-- product card example -->
-      <div class="product-card">
-        <img src="https://via.placeholder.com/150" alt="Avocado">
+      <div class="product-card" data-name="avocado" data-category="fruits" data-price="2.99">
+        <img src="/img/Avocado.svg" alt="Avocado" />
         <h3>Avocado</h3>
+        <p>$2.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="banana" data-category="fruits" data-price="0.69">
+        <img src="/img/banana.png" alt="Banana" />
+        <h3>Banana</h3>
+        <p>$0.69</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="tomato" data-category="vegetables" data-price="3.99">
+        <img src="/img/Baby Plum Tomatoes.png" alt="Baby Plum Tomatoes" />
+        <h3>Baby Plum Tomatoes</h3>
+        <p>$3.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Beetroot" data-category="vegetables" data-price="3.99">
+        <img src="/img/Beetroot.png" alt="Beetroot" />
+        <h3>Beetroot</h3>
+        <p>$3.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Blueberries" data-category="fruits" data-price="3.99">
+        <img src="/img/Blueberries.png" alt="Blueberries" />
+        <h3>Blueberries</h3>
+        <p>$3.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Butternut Squash" data-category="vegetables" data-price="1.99">
+        <img src="/img/Butternut Squash.png" alt="Butternut Squash" />
+        <h3>Butternut Squash</h3>
         <p>$1.99</p>
         <button>Add to Cart</button>
       </div>
-      <!-- more product cards -->
+      <div class="product-card" data-name="Cabbage" data-category="vegetables" data-price="1.49">
+        <img src="./img/Cabbage.png" alt="Cabbage" />
+        <h3>Cabbage</h3>
+        <p>$1.49</p>
+        <button>Add to Cart</button>
+      </div>
     </div>
 
     <!-- Sidebar -->
@@ -61,10 +113,8 @@
       <div class="popular-products">
         <h3>Popular products</h3>
         <ul>
-          <li>Ackee</li>
-          <li>Chicken</li>
-          <li>Salmon</li>
-          <li>Allspice</li>
+          <li>Avocado</li>
+          <li>Banana</li>
           <li>Beef</li>
         </ul>
       </div>
@@ -83,10 +133,11 @@
     <div class="container footer-container">
       <div class="footer-text">
         <p>Discover the Variety of Flavors and Quality</p>
-        <p>An online store where you will find fresh, natural and delicious products for a healthy life and unforgettable gastronomic adventures.</p>
+        <p>An online store where you will find fresh, natural and delicious products for a healthy life and
+          unforgettable gastronomic adventures.</p>
       </div>
       <div class="footer-subscribe">
-        <input type="email" placeholder="Your email">
+        <input type="email" placeholder="Your email" />
         <button>Send</button>
       </div>
     </div>
@@ -98,6 +149,8 @@
       </ul>
     </div>
   </footer>
+
+  <script src="./scripts/main.js"></script>
 </body>
 
 </html>
