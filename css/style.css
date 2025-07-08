@@ -55,6 +55,11 @@ body {
   color: var(--color-dark);
 }
 
+.logo-img {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+}
 .nav-list {
   display: flex;
   list-style: none;
@@ -71,14 +76,16 @@ body {
   color: var(--color-primary);
 }
 
-.cart-button {
+.home-button {
   background-color: var(--color-primary);
   color: var(--color-light);
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
+  border-radius: 20px;
+  width: 104px;
+  height: 48px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-left: 729px;
 }
 
 .cart-button:hover {
@@ -116,18 +123,16 @@ body {
 
 .hero-image img {
   width: 100%;
-  border-radius: 20px;
+  border-radius: 50px;
 }
 
 .badge {
+  width: 100px;
+  height: 100px;
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--color-badge);
-  color: var(--color-dark);
-  padding: 8px 16px;
-  border-radius: 50%;
-  font-weight: bold;
+  top: -50px;
+  right: -500px;
+
 }
 
 /* Filters */
@@ -359,5 +364,17 @@ body {
   background-color: #e7f0d6;
   color: var(--color-primary);
 }
+.basket-img {
+  width: 38px;
+  height: 38px;
+  vertical-align: middle;
+}
+.profile {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
 
-
+  position: absolute;
+  margin-left: 100px;
+  margin-top: -15px;
+}
