@@ -1,43 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shopping Cart</title>
-  <link rel="stylesheet" href="/css/profile.css"/>
+  <meta charset="UTF-8">
+  <title>Cart</title>
+  <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
-
   <div class="cart-container">
-    <h2 class="cart-title">Shopping Cart</h2>
+    <div class="cart-left">
+      <div class="cart-header">
+        <h2><img src="/static/icons/cart-icon.svg" alt="Cart"> CART (3)</h2>
+        <button class="delete-all">Delete all ✕</button>
+      </div>
 
-    <ul class="cart-list">
-      <li class="cart-item">
-        <img src="images/avocado.png" alt="Avocado" class="cart-image" />
-        <div class="cart-info">
-          <h3 class="cart-item-name">Avocado</h3>
-          <p class="cart-item-price">$3.99 × 2</p>
-        </div>
-        <p class="cart-item-total">$7.98</p>
-      </li>
+      <ul class="cart-items">
+        <li class="cart-item">
+          <img src="/static/images/avocado.png" alt="Avocado" class="item-image">
+          <div class="item-details">
+            <h3>Avocado</h3>
+            <p>Category: Fresh Produce</p>
+            <p>Size: Each</p>
+            <span class="item-price">$1.99</span>
+          </div>
+          <button class="item-remove">✕</button>
+        </li>
 
-      <li class="cart-item">
-        <img src="images/strawberry.png" alt="Strawberry" class="cart-image" />
-        <div class="cart-info">
-          <h3 class="cart-item-name">Strawberry</h3>
-          <p class="cart-item-price">$2.49 × 1</p>
-        </div>
-        <p class="cart-item-total">$2.49</p>
-      </li>
-    </ul>
+        <li class="cart-item">
+          <img src="/static/images/mushroom.png" alt="Mushroom" class="item-image">
+          <div class="item-details">
+            <h3>Chestnut Mushroom</h3>
+            <p>Category: Fresh Produce</p>
+            <p>Size: Box package</p>
+            <span class="item-price">$2.49</span>
+          </div>
+          <button class="item-remove">✕</button>
+        </li>
 
-    <div class="cart-summary">
-      <span>Total:</span>
-      <span class="cart-total">$10.47</span>
+        <li class="cart-item">
+          <img src="/static/images/cabbage.png" alt="Cabbage" class="item-image">
+          <div class="item-details">
+            <h3>Cabbage</h3>
+            <p>Category: Fresh Produce</p>
+            <p>Size: Per head</p>
+            <span class="item-price">$1.99</span>
+          </div>
+          <button class="item-remove">✕</button>
+        </li>
+      </ul>
     </div>
 
-    <button class="checkout-btn">Checkout</button>
+    <div class="cart-right">
+      <h3>YOUR ORDER</h3>
+      <div class="total-box">
+        <span>Total</span>
+        <span class="sum">$12.94</span>
+      </div>
+      <input type="email" class="email-input" placeholder="Mail: Enter your email">
+      <button class="checkout-btn">Checkout</button>
+    </div>
   </div>
-
 </body>
 </html>

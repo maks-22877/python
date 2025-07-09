@@ -54,3 +54,24 @@ document.addEventListener('DOMContentLoaded', () => {
   categoryFilter.addEventListener('change', filterProducts);
   sortSelect.addEventListener('change', filterProducts);
 });
+
+
+
+
+const decrementBtn = document.getElementById("decrement");
+const incrementBtn = document.getElementById("increment");
+const counterValue = document.getElementById("counterValue");
+
+let count = 3;
+
+decrementBtn.addEventListener("click", () => {
+  if (count > 1) {
+    count--;
+    counterValue.textContent = count;
+  }
+});
+
+incrementBtn.addEventListener("click", () => {
+  count++;
+  counterValue.textContent = count;
+});
