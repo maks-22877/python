@@ -1,63 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cart</title>
-  <link rel="stylesheet" href="/css/profile.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile - Food Boutique</title>
+  <link rel="stylesheet" href="./css/profile.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="cart-container">
-    <div class="cart-left">
-      <div class="cart-header">
-        <h2><img src="/static/icons/cart-icon.svg" alt="Cart"> CART (3)</h2>
-        <button class="delete-all">Delete all ✕</button>
+  <header class="header">
+    <div class="container header-container">
+      <p class="logo">Food Boutique</p>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="card.html">Cart</a>
+        <a class="active" href="profile.html">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="profile container">
+    <h1 class="profile-title">My Profile</h1>
+
+    <section class="profile-overview">
+      <img src="./img/user-avatar.png" alt="User Avatar" class="profile-avatar" />
+      <div class="profile-info">
+        <h2 class="username">Максим Карпенко</h2>
+        <p>Email: maxkarpenko@gmail.com</p>
+        <p>Phone: +380 (99) 123-45-67</p>
+        <p>Joined: March 14, 2024</p>
+        <button class="edit-btn">Edit Profile</button>
       </div>
+    </section>
 
-      <ul class="cart-items">
-        <li class="cart-item">
-          <img src="/static/images/avocado.png" alt="Avocado" class="item-image">
-          <div class="item-details">
-            <h3>Avocado</h3>
-            <p>Category: Fresh Produce</p>
-            <p>Size: Each</p>
-            <span class="item-price">$1.99</span>
+    <section class="order-history">
+      <h2>Order History</h2>
+      <ul class="orders">
+        <li class="order">
+          <div>
+            <h3>Order #1045</h3>
+            <p>Placed: 10 June 2025</p>
+            <p>Status: Delivered</p>
           </div>
-          <button class="item-remove">✕</button>
-        </li>
-
-        <li class="cart-item">
-          <img src="/static/images/mushroom.png" alt="Mushroom" class="item-image">
-          <div class="item-details">
-            <h3>Chestnut Mushroom</h3>
-            <p>Category: Fresh Produce</p>
-            <p>Size: Box package</p>
-            <span class="item-price">$2.49</span>
+          <div>
+            <p>Total: ₴389.00</p>
+            <a href="#" class="view-btn">View</a>
           </div>
-          <button class="item-remove">✕</button>
         </li>
-
-        <li class="cart-item">
-          <img src="/static/images/cabbage.png" alt="Cabbage" class="item-image">
-          <div class="item-details">
-            <h3>Cabbage</h3>
-            <p>Category: Fresh Produce</p>
-            <p>Size: Per head</p>
-            <span class="item-price">$1.99</span>
+        <li class="order">
+          <div>
+            <h3>Order #1037</h3>
+            <p>Placed: 28 May 2025</p>
+            <p>Status: Delivered</p>
           </div>
-          <button class="item-remove">✕</button>
+          <div>
+            <p>Total: ₴212.50</p>
+            <a href="#" class="view-btn">View</a>
+          </div>
         </li>
+        <!-- Ще замовлення... -->
       </ul>
-    </div>
+    </section>
 
-    <div class="cart-right">
-      <h3>YOUR ORDER</h3>
-      <div class="total-box">
-        <span>Total</span>
-        <span class="sum">$12.94</span>
+    <section class="saved-items">
+      <h2>Saved Items</h2>
+      <div class="saved-products">
+        <div class="product-card">
+          <img src="./img/product-1.jpg" alt="Product" />
+          <p>Organic Avocados</p>
+          <span>₴89.00</span>
+        </div>
+        <div class="product-card">
+          <img src="./img/product-2.jpg" alt="Product" />
+          <p>Chia Seeds 200g</p>
+          <span>₴52.00</span>
+        </div>
       </div>
-      <input type="email" class="email-input" placeholder="Mail: Enter your email">
-      <button class="checkout-btn">Checkout</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Food Boutique. All rights reserved.</p>
     </div>
-  </div>
+  </footer>
 </body>
 </html>

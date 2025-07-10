@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Cart - Food Boutique</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="/css/card.css">
-
-
+  <link rel="stylesheet" href="/css/card.css" />
 </head>
-<body>
 
+<body>
   <!-- HEADER -->
   <div class="container header-container">
-      <p class="logo">  <img class="logo-img" src="/img/icon.svg">Food <span>Boutique</span></p>
-        <a href="index.html" class="home-button">Home</a>
-      <a href="card.html" class="basket" ><img class="basket-img" src="/img/basket.svg">CART(3)</a>
-      <a href="profile.html"> <img class="profile" src="/img/image-removebg-preview.png" alt="avatar"></a>
-    </div>
+    <p class="logo">
+      <img class="logo-img" src="/img/icon.svg" />Food <span>Boutique</span>
+    </p>
+    <a href="index.html" class="home-button">Home</a>
+    <a href="card.html" class="basket"><img class="basket-img" src="/img/basket.svg" />CART(3)</a>
+    <a href="profile.html">
+      <img class="profile" src="/img/image-removebg-preview.png" alt="avatar" />
+    </a>
+  </div>
 
   <!-- MAIN CART CONTENT -->
   <main class="cart-wrapper container">
@@ -28,43 +30,51 @@
       </div>
       <ul class="cart-items">
         <!-- Item 1 -->
-        <li class="cart-item">
-          <img src="/static/images/avocado.png" alt="Avocado" class="item-image">
+        <li class="cart-item" data-price="1.99">
+          <img src="/static/images/avocado.png" alt="Avocado" class="item-image" />
           <div class="item-details">
-            <h3>Avocado</h3>
-            <p>Category: Fresh Produce</p>
-            <p>Size: Each</p>
-            <span class="item-price">$1.99</span>
-            <div class="counter">
-  <button class="counter-btn" id="decrement">–</button>
-  <span class="counter-value" id="counterValue">3</span>
-  <button class="counter-btn" id="increment">+</button>
-</div>
+            <p class="item-name">Avocado</p>
+            <p class="item-price">$<span class="price-single">1.99</span></p>
 
+            <div class="counter">
+              <button class="counter-btn" data-action="decrement">–</button>
+              <span class="counter-value">1</span>
+              <button class="counter-btn" data-action="increment">+</button>
+            </div>
           </div>
           <button class="item-remove">✕</button>
         </li>
 
         <!-- Item 2 -->
-        <li class="cart-item">
-          <img src="/static/images/mushroom.png" alt="Mushroom" class="item-image">
+        <li class="cart-item" data-price="2.49">
+          <img src="/static/images/mushroom.png" alt="Mushroom" class="item-image" />
           <div class="item-details">
             <h3>Chestnut Mushroom</h3>
             <p>Category: Fresh Produce</p>
             <p>Size: Box package</p>
             <span class="item-price">$2.49</span>
+            <div class="counter">
+              <button class="counter-btn" data-action="decrement">–</button>
+              <span class="counter-value">1</span>
+              <button class="counter-btn" data-action="increment">+</button>
+            </div>
           </div>
           <button class="item-remove">✕</button>
         </li>
 
         <!-- Item 3 -->
-        <li class="cart-item">
-          <img src="/static/images/cabbage.png" alt="Cabbage" class="item-image">
+        <li class="cart-item" data-price="1.99">
+          <img src="/static/images/cabbage.png" alt="Cabbage" class="item-image" />
           <div class="item-details">
             <h3>Cabbage</h3>
             <p>Category: Fresh Produce</p>
             <p>Size: Per head</p>
             <span class="item-price">$1.99</span>
+            <div class="counter">
+              <button class="counter-btn" data-action="decrement">–</button>
+              <span class="counter-value">1</span>
+              <button class="counter-btn" data-action="increment">+</button>
+            </div>
           </div>
           <button class="item-remove">✕</button>
         </li>
@@ -73,11 +83,9 @@
 
     <aside class="cart-right">
       <h3>YOUR ORDER</h3>
-      <div class="total-box">
-        <span>Total</span>
-        <span class="sum">$12.94</span>
-      </div>
-      <input type="email" class="email-input" placeholder="Mail: Enter your email">
+      <p>Total: $<span id="cart-total">0.00</span></p>
+
+      <input type="email" class="email-input" placeholder="Mail: Enter your email" />
       <button class="checkout-btn">Checkout</button>
     </aside>
   </main>
@@ -87,12 +95,13 @@
     <div class="footer-top container">
       <div class="footer-logo">🍏 Food Boutique</div>
       <p class="footer-text">
-        Discover the Variety of Flavors and Quality<br>
-        An online store where you will find fresh, natural and delicious products for a healthy life and unforgettable gastronomic adventures.
+        Discover the Variety of Flavors and Quality<br />
+        An online store where you will find fresh, natural and delicious products for a healthy life and unforgettable
+        gastronomic adventures.
       </p>
       <div class="footer-subscribe">
         <p>Subscribe and learn about new products!</p>
-        <input type="email" placeholder="Email" class="subscribe-input">
+        <input type="email" placeholder="Email" class="subscribe-input" />
         <button class="subscribe-btn">Send</button>
       </div>
     </div>
@@ -101,7 +110,9 @@
       <p><a href="#">Privacy Policy</a> / <a href="#">Terms of Service</a></p>
     </div>
   </footer>
-  <script src="./main.js" defer></script>
 
+  <!-- Підключення скрипту -->
+  <script src="/scripts/card.js" defer></script>
 </body>
+
 </html>
