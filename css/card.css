@@ -327,3 +327,23 @@ body {
   color: #fff;
   text-decoration: underline;
 }
+
+
+
+
+.add-to-cart-btn {
+  display: block;
+  margin: 10px auto 0;
+  padding: 8px 16px;
+  background-color: #6D8434;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #5a6e2c;
+}

@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateTotals() {
     const cart = getCart();
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    if (totalEl) totalEl.textContent = total.toFixed(2) + " грн";
+    if (totalEl) totalEl.textContent = total.toFixed(2) + "$";
   }
 
   function loadCart() {
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (cart.length === 0) {
       cartContainer.innerHTML = "<p>Кошик порожній</p>";
-      if (totalEl) totalEl.textContent = "0 грн";
+      if (totalEl) totalEl.textContent = "0 $";
       return;
     }
 
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="${item.image}" alt="${item.title}" />
         <div>
           <h3>${item.title}</h3>
-          <p>${item.price} грн</p>
+          <p>${item.price} $</p>
           <div class="counter">
             <button class="counter-btn" data-action="decrement" data-index="${index}">-</button>
             <span class="counter-value">${item.quantity}</span>
