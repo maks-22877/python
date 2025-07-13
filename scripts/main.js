@@ -75,3 +75,34 @@ incrementBtn.addEventListener("click", () => {
   count++;
   counterValue.textContent = count;
 });
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cartKey = "cartItems";
+
+  function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    cart.push(product);
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+    alert("Товар додано до кошика!");
+  }
+
+  const addToCartButtons = document.querySelectorAll(".add-to-cart");
+  addToCartButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const productCard = btn.closest(".product-card");
+
+      const product = {
+        id: Date.now(),
+        title: productCard.querySelector(".product-title").textContent,
+        price: productCard.querySelector(".product-price").textContent,
+        image: productCard.querySelector("img").getAttribute("src")
+      };
+
+      addToCart(product);
+    });
+  });
+});

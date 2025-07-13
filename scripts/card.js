@@ -40,3 +40,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateTotals(); // Запуск на початку
 });
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cartKey = "cartItems";
+  const cartContainer = document.querySelector(".cart-items");
+  const clearBtn = document.querySelector(".clear-cart");
+
+  function loadCart() {
+    cartContainer.innerHTML = "";
+    const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+    if (cart.length === 0) {
+      cartContainer.innerHTML = "<p>Кошик порожній</p>";
+      return;
+    }
+
+    cart.forEach((item, index) => {
+      const productEl = document.createElement("div");
+      productEl.className = "cart-item";
+      productEl.innerHTML = `
+        <img src="${item.image}" alt="${item.title}" />
+        <div>
+          <h3>${item.title}</h3>
+          <p>${item.price}</p>
+        </div>
+        <button class="remove-item" data-index="${index}">✖</button>
+      `;
+      cartContainer.appendChild(productEl);
+    });
+
+    document.querySelectorAll(".remove-item").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const index = btn.getAttribute("data-index");
+        removeFromCart(index);
+      });
+    });
+  }
+
+  function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    cart.splice(index, 1);
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+    loadCart();
+  }
+
+  clearBtn?.addEventListener("click", () => {
+    localStorage.removeItem(cartKey);
+    loadCart();
+  });
+
+  loadCart();
+});
