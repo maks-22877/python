@@ -22,73 +22,10 @@
   </div>
 
   <!-- MAIN CART CONTENT -->
-  <main class="cart-wrapper container">
-    <section class="cart-left">
-      <div class="cart-header">
-        <h2>🛒 CART (3)</h2>
-        <button class="delete-all">Delete all ✕</button>
-      </div>
-      <ul class="cart-items">
-        <!-- Item 1 -->
-        <li class="cart-item" data-price="1.99">
-          <img src="/static/images/avocado.png" alt="Avocado" class="item-image" />
-          <div class="item-details">
-            <p class="item-name">Avocado</p>
-            <p class="item-price">$<span class="price-single">1.99</span></p>
+<div class="cart-items"></div>
+<div>Загальна сума: <span id="cart-total">0 грн</span></div>
+<button class="clear-cart">Очистити кошик</button>
 
-            <div class="counter">
-              <button class="counter-btn" data-action="decrement">–</button>
-              <span class="counter-value">1</span>
-              <button class="counter-btn" data-action="increment">+</button>
-            </div>
-          </div>
-          <button class="item-remove">✕</button>
-        </li>
-
-        <!-- Item 2 -->
-        <li class="cart-item" data-price="2.49">
-          <img src="/static/images/mushroom.png" alt="Mushroom" class="item-image" />
-          <div class="item-details">
-            <h3>Chestnut Mushroom</h3>
-            <p>Category: Fresh Produce</p>
-            <p>Size: Box package</p>
-            <span class="item-price">$2.49</span>
-            <div class="counter">
-              <button class="counter-btn" data-action="decrement">–</button>
-              <span class="counter-value">1</span>
-              <button class="counter-btn" data-action="increment">+</button>
-            </div>
-          </div>
-          <button class="item-remove">✕</button>
-        </li>
-
-        <!-- Item 3 -->
-        <li class="cart-item" data-price="1.99">
-          <img src="/static/images/cabbage.png" alt="Cabbage" class="item-image" />
-          <div class="item-details">
-            <h3>Cabbage</h3>
-            <p>Category: Fresh Produce</p>
-            <p>Size: Per head</p>
-            <span class="item-price">$1.99</span>
-            <div class="counter">
-              <button class="counter-btn" data-action="decrement">–</button>
-              <span class="counter-value">1</span>
-              <button class="counter-btn" data-action="increment">+</button>
-            </div>
-          </div>
-          <button class="item-remove">✕</button>
-        </li>
-      </ul>
-    </section>
-
-    <aside class="cart-right">
-      <h3>YOUR ORDER</h3>
-      <p>Total: $<span id="cart-total">0.00</span></p>
-
-      <input type="email" class="email-input" placeholder="Mail: Enter your email" />
-      <button class="checkout-btn">Checkout</button>
-    </aside>
-  </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
@@ -112,7 +49,7 @@
   </footer>
 
   <!-- Підключення скрипту -->
-  <script src="/scripts/card.js" defer></script>
+  <script src="/scripts/main.js" defer></script>
 </body>
 
 </html>
