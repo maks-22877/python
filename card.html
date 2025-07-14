@@ -11,97 +11,79 @@
 <body>
   <!-- HEADER -->
   <div class="container header-container">
-    <p class="logo">
-      <img class="logo-img" src="/img/icon.svg" />Food <span>Boutique</span>
-    </p>
-    <a href="index.html" class="home-button">Home</a>
-    <a href="card.html" class="basket"><img class="basket-img" src="/img/basket.svg" />CART(<span id="cart-count">0</span>)</a>
-    <a href="profile.html">
-      <img class="profile" src="/img/image-removebg-preview.png" alt="avatar" />
-    </a>
-  </div>
+  <a href="index.html" class="logo">
+    <img src="/img/icon.svg" alt="Logo" class="logo-img">
+    Food <span>Boutique</span>
+  </a>
+  <a href="index.html" class="home-button">Home</a>
+  <a href="card.html" class="basket">
+    <img src="/img/basket.svg" alt="Basket" class="basket-img">
+    CART 
+  </a>
+  <a href="profile.html">
+    <img src="/img/image-removebg-preview.png" alt="Profile" class="profile">
+  </a>
+</div>
+<div class="cart-header">
+       <div class="cart-icon" ><img class="cart-icon-img" src="/img/heroicons-solid_shopping-cart.png" alt="cart"></div><h2 class="cart"> CART </h2>
+      <button class="clear-cart" id="clear-cart">Delete all ✖</button>
+    </div>
 
   <!-- MAIN CART CONTENT -->
   <main class="container cart-wrapper">
     <!-- Left (items) -->
-    <section class="cart-left">
-      <div class="cart-header">
-        <h2>CART (<span id="cart-count-left">0</span>)</h2>
-        
-        <button class="clear-cart" id="clear-cart">Delete all ✖</button>
+    <main class="container cart-wrapper">
+  <section class="cart-left">
+    
+    
+    <div class="cart-items" id="cart-items"><div class="counter">
+  <button class="counter-btn" data-action="decrement" data-index="${index}">-</button>
+  <span class="counter-value">${item.quantity}</span>
+  <button class="counter-btn" data-action="increment" data-index="${index}">+</button>
+</div>
+</div>
+  </section>
 
-      </div>
-      
-      <ul class="cart-items" id="cart-items">
-        <!-- JS додає товари сюди -->
-      </ul>
-    </section>
+  <section class="cart-right">
+    <h3>YOUR ORDER</h3>
+    <div class="total-box">
+      <span>Total</span>
+      <span id="cart-total">$0.00</span>
+    </div>
+    <input type="email" class="email-input" placeholder="Mail: Enter your email">
+    <button class="checkout-btn">Checkout</button>
+  </section>
+</main>
 
-    <!-- Right (summary) -->
-    <section class="cart-right">
-      <h3>YOUR ORDER</h3>
-      <div class="total-box">
-        <span>Total</span>
-        <span id="cart-total">$0.00</span>
-      </div>
-      <input type="email" class="email-input" placeholder="Mail: Enter your email" />
-      <button class="checkout-btn">Checkout</button>
-    </section>
   </main>
 
   <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-top container">
-      <div>
-        <div class="footer-logo">🍏 Food Boutique</div>
-        <p class="footer-text">
-          Discover the Variety of Flavors and Quality<br />
-          An online store where you will find fresh, natural and delicious products for a healthy life and unforgettable gastronomic adventures.
-        </p>
-      </div>
-      <div class="footer-subscribe">
-        <p>Subscribe and learn about new products!</p>
-        <input type="email" placeholder="Email" class="subscribe-input" />
-        <button class="subscribe-btn">Send</button>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>Food Boutique. All rights reserved.</p>
-      <p><a href="#">Privacy Policy</a> / <a href="#">Terms of Service</a></p>
-    </div>
-  </footer>
-
-  <!-- Скрипт -->
-  <script src="/scripts/cart.js" defer></script>
-</body>
-
-</html>
-
-<div class="cart-items"></div>
-<div>Загальна сума: <span id="cart-total">0 $</span></div>
-<button class="clear-cart">Очистити кошик</button>
-
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-top container">
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div>
       <div class="footer-logo">🍏 Food Boutique</div>
-      <p class="footer-text">
-        Discover the Variety of Flavors and Quality<br />
-        An online store where you will find fresh, natural and delicious products for a healthy life and unforgettable
-        gastronomic adventures.
+      <p class="footer-text title">Discover the Variety of<br>Flavors and Quality</p>
+      <p class="footer-text desc">
+        An online store where you will find fresh, natural and delicious products
+        for a healthy life and unforgettable gastronomic adventures.
       </p>
-      <div class="footer-subscribe">
-        <p>Subscribe and learn about new products!</p>
-        <input type="email" placeholder="Email" class="subscribe-input" />
-        <button class="subscribe-btn">Send</button>
-      </div>
     </div>
-    <div class="footer-bottom">
-      <p>Food Boutique. All rights reserved.</p>
-      <p><a href="#">Privacy Policy</a> / <a href="#">Terms of Service</a></p>
+
+    <div class="footer-subscribe">
+      <p class="subscribe-text">Subscribe and learn about new products!</p>
+      <input type="email" placeholder="Email" class="subscribe-input" />
+      <button class="subscribe-btn">Send</button>
     </div>
-  </footer>
+  </div>
+
+  <div class="footer-bottom container">
+    <p>Food Boutique. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> / <a href="#">Terms of Service</a></p>
+  </div>
+</footer>
+
+
+
 
   <!-- Підключення скрипту -->
   <script src="/scripts/main.js" defer></script>

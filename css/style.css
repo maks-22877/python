@@ -21,7 +21,7 @@
 body {
   font-family: 'Inter', sans-serif;
   color: var(--color-dark);
-  background-color: var(--color-light);
+  background-color: var(--color-badge-bg);
   line-height: 1.5;
 }
 
@@ -33,9 +33,9 @@ body {
 
 /* Header */
 .header {
-  background-color: var(--color-light);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  padding: 20px 0;
+  background-color: var(--color-badge-bg);
+  
+  
 }
 
 .header-container {
@@ -84,9 +84,12 @@ body {
   width: 104px;
   height: 48px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-left: 729px;
+  font-size: 16px;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 729px;
 }
 
 .cart-button:hover {
@@ -95,8 +98,8 @@ body {
 
 /* Hero */
 .hero {
-  background-color: var(--color-hero-bg);
-  padding: 80px 0;
+  background-color: var(--color-badge-bgg);
+ 
   text-align: center;
 }
 
@@ -380,6 +383,26 @@ body {
   margin-top: -15px;
 }
 
+.popup {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #6D8434;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 9999;
+  font-size: 16px;
+  pointer-events: none;
+}
+.popup.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 
 

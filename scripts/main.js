@@ -79,8 +79,25 @@ function addToCart(product) {
     cart.push(product);
   }
   saveCart(cart);
-  alert("Товар додано до кошика!");
+  showPopup("Товар додано до кошика!"); // кастомне повідомлення
 }
+function showPopup(message) {
+  let popup = document.getElementById("popup");
+  if (!popup) {
+    popup = document.createElement("div");
+    popup.id = "popup";
+    popup.className = "popup";
+    document.body.appendChild(popup);
+  }
+
+  popup.textContent = message;
+  popup.classList.add("show");
+
+  setTimeout(() => {
+    popup.classList.remove("show");
+  }, 3000);
+}
+
 
 // Додавання товарів на головній
 document.addEventListener("DOMContentLoaded", () => {
