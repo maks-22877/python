@@ -129,3 +129,35 @@ document.addEventListener("DOMContentLoaded", () => {
   checkLoggedIn();
 });
 
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("editModal");
+    const btn = document.getElementById("editBtn");
+    const closeBtn = document.querySelector(".close");
+    const form = document.getElementById("editForm");
+
+    btn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+
+    window.onclick = (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById("nameInput").value;
+      const email = document.getElementById("emailInput").value;
+      const photo = document.getElementById("photoInput").value;
+
+      console.log("Name:", name);
+      console.log("Email:", email);
+      console.log("Photo URL:", photo);
+
+      // Тут можна оновити DOM або зберегти в localStorage
+      modal.style.display = "none";
+    };
+  });
+
+
+
