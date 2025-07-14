@@ -15,13 +15,68 @@
       <img class="logo-img" src="/img/icon.svg" />Food <span>Boutique</span>
     </p>
     <a href="index.html" class="home-button">Home</a>
-    <a href="card.html" class="basket"><img class="basket-img" src="/img/basket.svg" />CART(3)</a>
+    <a href="card.html" class="basket"><img class="basket-img" src="/img/basket.svg" />CART(<span id="cart-count">0</span>)</a>
     <a href="profile.html">
       <img class="profile" src="/img/image-removebg-preview.png" alt="avatar" />
     </a>
   </div>
 
   <!-- MAIN CART CONTENT -->
+  <main class="container cart-wrapper">
+    <!-- Left (items) -->
+    <section class="cart-left">
+      <div class="cart-header">
+        <h2>CART (<span id="cart-count-left">0</span>)</h2>
+        
+        <button class="clear-cart" id="clear-cart">Delete all ✖</button>
+
+      </div>
+      
+      <ul class="cart-items" id="cart-items">
+        <!-- JS додає товари сюди -->
+      </ul>
+    </section>
+
+    <!-- Right (summary) -->
+    <section class="cart-right">
+      <h3>YOUR ORDER</h3>
+      <div class="total-box">
+        <span>Total</span>
+        <span id="cart-total">$0.00</span>
+      </div>
+      <input type="email" class="email-input" placeholder="Mail: Enter your email" />
+      <button class="checkout-btn">Checkout</button>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top container">
+      <div>
+        <div class="footer-logo">🍏 Food Boutique</div>
+        <p class="footer-text">
+          Discover the Variety of Flavors and Quality<br />
+          An online store where you will find fresh, natural and delicious products for a healthy life and unforgettable gastronomic adventures.
+        </p>
+      </div>
+      <div class="footer-subscribe">
+        <p>Subscribe and learn about new products!</p>
+        <input type="email" placeholder="Email" class="subscribe-input" />
+        <button class="subscribe-btn">Send</button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Food Boutique. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a> / <a href="#">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <!-- Скрипт -->
+  <script src="/scripts/cart.js" defer></script>
+</body>
+
+</html>
+
 <div class="cart-items"></div>
 <div>Загальна сума: <span id="cart-total">0 $</span></div>
 <button class="clear-cart">Очистити кошик</button>
