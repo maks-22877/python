@@ -349,6 +349,25 @@
         <p>Phone: <span id="profilePhone">+380 (99) 123-45-67</span></p>
         <p>Joined: <span id="profileJoined">March 14, 2024</span></p>
         <button class="edit-btn" id="editProfileBtn">Edit Profile</button>
+        <div class="modal" id="editModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Edit Profile</h2>
+    <form id="editForm">
+      <label for="nameInput">Name:</label>
+      <input type="text" id="nameInput" placeholder="Your name" required />
+
+      <label for="emailInput">Email:</label>
+      <input type="email" id="emailInput" placeholder="Your email" required />
+
+      <label for="photoInput">Profile Photo URL:</label>
+      <input type="text" id="photoInput" placeholder="https://..." />
+
+      <button type="submit" class="save-btn">Save</button>
+    </form>
+  </div>
+</div>
+
         <button class="edit-btn" id="logoutBtn" style="background:#b03434; margin-left: 16px;">Logout</button>
       </div>
     </section>

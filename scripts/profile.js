@@ -1,163 +1,244 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-  const PROFILE_KEY = "userProfile";
-  const USER_KEY = "userAccount";
+  const USERS_KEY = "accounts";
+  const CURRENT_KEY = "activeUser";
 
-  const loginForm = document.getElementById("login-form");
-  const registerForm = document.getElementById("register-form");
-  const profileSection = document.getElementById("profile-section");
   const authSection = document.getElementById("auth-section");
+  const profileSection = document.getElementById("profile-section");
+  const authTitle = document.getElementById("auth-title");
+  const authError = document.getElementById("auth-error");
 
-  const showRegister = document.getElementById("showRegister");
-  const showLogin = document.getElementById("showLogin");
+  const loginEmailInput = document.getElementById("loginEmail");
+  const loginPasswordInput = document.getElementById("loginPassword");
+  const loginBtn = document.getElementById("loginBtn");
 
-  const editPopup = document.getElementById("editProfilePopup");
-  const editNameInput = document.getElementById("editName");
-  const editEmailInput = document.getElementById("editEmail");
-  const editPhoneInput = document.getElementById("editPhone");
-  const saveEditBtn = document.getElementById("saveEditBtn");
-  const cancelEditBtn = document.getElementById("cancelEditBtn");
+  const toggleRegisterLink = document.getElementById("toggleRegister");
+  const registerForm = document.getElementById("registerForm");
+  const regNameInput = document.getElementById("regName");
+  const regEmailInput = document.getElementById("regEmail");
+  const regPasswordInput = document.getElementById("regPassword");
+  const regPhoneInput = document.getElementById("regPhone");
+  const registerBtn = document.getElementById("registerBtn");
+  const toggleLoginLink = document.getElementById("toggleLogin");
 
-  function showProfile(profile) {
+  const profileAvatar = document.getElementById("profileAvatar");
+  const avatarInput = document.getElementById("avatarInput");
+  const profileName = document.getElementById("profileName");
+  const profileEmail = document.getElementById("profileEmail");
+  const profilePhone = document.getElementById("profilePhone");
+  const profileJoined = document.getElementById("profileJoined");
+  const editProfileBtn = document.getElementById("editProfileBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  const editModal = document.getElementById("editModal");
+  const closeBtn = document.querySelector(".close");
+  const form = document.getElementById("editForm");
+  const nameInput = document.getElementById("nameInput");
+  const emailInput = document.getElementById("emailInput");
+  const photoInput = document.getElementById("photoInput");
+
+  // ================== AUTH ===================
+
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function validatePhone(phone) {
+    const re = /^[\d\+\-\(\) ]{6,20}$/;
+    return re.test(phone);
+  }
+
+  function showProfile(user) {
     authSection.style.display = "none";
     profileSection.style.display = "block";
 
-    document.getElementById("profileName").textContent = profile.name || "";
-    document.getElementById("profileEmail").textContent = profile.email || "";
-    document.getElementById("profilePhone").textContent = profile.phone || "";
-    document.getElementById("profileJoined").textContent = profile.joined || new Date().toLocaleDateString();
+    profileName.textContent = user.name || "Користувач";
+    profileEmail.textContent = user.email || "";
+    profilePhone.textContent = user.phone || "Не вказано";
+    profileJoined.textContent = user.joined || new Date().toLocaleDateString();
 
-    if (profile.avatar) {
-      document.getElementById("profileAvatar").src = profile.avatar;
-    }
+    profileAvatar.src = user.avatar || "./img/user-avatar.png";
   }
 
-  function checkLoggedIn() {
-    const profile = JSON.parse(localStorage.getItem(PROFILE_KEY));
-    if (profile && profile.email) {
-      showProfile(profile);
-    }
-  }
-
-  showRegister.addEventListener("click", (e) => {
-    e.preventDefault();
-    loginForm.style.display = "none";
-    registerForm.style.display = "block";
-  });
-
-  showLogin.addEventListener("click", (e) => {
-    e.preventDefault();
-    registerForm.style.display = "none";
-    loginForm.style.display = "block";
-  });
-
-  document.getElementById("registerBtn").addEventListener("click", () => {
-    const name = document.getElementById("regName").value.trim();
-    const email = document.getElementById("regEmail").value.trim();
-    const password = document.getElementById("regPassword").value.trim();
-    const phone = document.getElementById("regPhone").value.trim();
-    const joined = new Date().toLocaleDateString();
-
-    if (name && email && password) {
-      const user = { name, email, password, phone, joined };
-      localStorage.setItem(USER_KEY, JSON.stringify(user));
-      localStorage.setItem(PROFILE_KEY, JSON.stringify(user));
-      showProfile(user);
-    } else {
-      alert("Заповніть усі поля!");
-    }
-  });
-
-  document.getElementById("loginBtn").addEventListener("click", () => {
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value;
-    const user = JSON.parse(localStorage.getItem(USER_KEY));
-
-    if (user && user.email === email && user.password === password) {
-      localStorage.setItem(PROFILE_KEY, JSON.stringify(user));
-      showProfile(user);
-    } else {
-      alert("Невірний email або пароль!");
-    }
-  });
-
-  document.getElementById("logoutBtn").addEventListener("click", () => {
-    localStorage.removeItem(PROFILE_KEY);
+  function showAuth() {
     authSection.style.display = "block";
     profileSection.style.display = "none";
+    authTitle.textContent = "Увійти";
+    authError.textContent = "";
+    loginEmailInput.value = "";
+    loginPasswordInput.value = "";
+    registerForm.style.display = "none";
+
+    loginEmailInput.style.display = "block";
+    loginPasswordInput.style.display = "block";
+    loginBtn.style.display = "block";
+    toggleRegisterLink.style.display = "block";
+  }
+
+  function checkLogin() {
+    const activeUser = JSON.parse(localStorage.getItem(CURRENT_KEY));
+    if (activeUser && activeUser.email) {
+      showProfile(activeUser);
+      return true;
+    } else {
+      showAuth();
+      return false;
+    }
+  }
+
+  loginBtn.addEventListener("click", () => {
+    authError.textContent = "";
+    const email = loginEmailInput.value.trim().toLowerCase();
+    const password = loginPasswordInput.value;
+
+    if (!email) return (authError.textContent = "Email не може бути порожнім.");
+    if (!validateEmail(email)) return (authError.textContent = "Некоректний email.");
+    if (!password) return (authError.textContent = "Пароль не може бути порожнім.");
+
+    let users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (user) {
+      localStorage.setItem(CURRENT_KEY, JSON.stringify(user));
+      showProfile(user);
+    } else {
+      authError.textContent = "Невірний email або пароль.";
+    }
   });
 
-  // ======== Edit Profile Logic ==========
-  document.getElementById("editProfileBtn").addEventListener("click", () => {
-    const profile = JSON.parse(localStorage.getItem(PROFILE_KEY));
-    if (!profile) return;
+  registerBtn.addEventListener("click", () => {
+    authError.textContent = "";
 
-    editNameInput.value = profile.name || "";
-    editEmailInput.value = profile.email || "";
-    editPhoneInput.value = profile.phone || "";
+    const name = regNameInput.value.trim();
+    const email = regEmailInput.value.trim().toLowerCase();
+    const password = regPasswordInput.value;
+    const phone = regPhoneInput.value.trim();
+    const joined = new Date().toLocaleDateString();
 
-    editPopup.style.display = "block";
+    if (!name) return (authError.textContent = "Ім’я не може бути порожнім.");
+    if (!email) return (authError.textContent = "Email не може бути порожнім.");
+    if (!validateEmail(email)) return (authError.textContent = "Некоректний email.");
+    if (!password || password.length < 6)
+      return (authError.textContent = "Пароль має містити мінімум 6 символів.");
+    if (phone && !validatePhone(phone)) return (authError.textContent = "Некоректний телефон.");
+
+    let users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+
+    if (users.find(u => u.email === email)) {
+      return (authError.textContent = "Користувач з таким email вже існує.");
+    }
+
+    const newUser = { name, email, password, phone, joined };
+    users.push(newUser);
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    localStorage.setItem(CURRENT_KEY, JSON.stringify(newUser));
+    showProfile(newUser);
   });
 
-  cancelEditBtn.addEventListener("click", () => {
-    editPopup.style.display = "none";
+  toggleRegisterLink.addEventListener("click", () => {
+    authTitle.textContent = "Реєстрація";
+    registerForm.style.display = "block";
+    loginEmailInput.style.display = "none";
+    loginPasswordInput.style.display = "none";
+    loginBtn.style.display = "none";
+    toggleRegisterLink.style.display = "none";
+    authError.textContent = "";
   });
 
-  saveEditBtn.addEventListener("click", () => {
-    const newName = editNameInput.value.trim();
-    const newEmail = editEmailInput.value.trim();
-    const newPhone = editPhoneInput.value.trim();
+  toggleLoginLink.addEventListener("click", () => {
+    showAuth();
+  });
 
-    if (!newName || !newEmail) {
-      alert("Ім'я та email обов'язкові.");
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem(CURRENT_KEY);
+    showAuth();
+  });
+
+  profileAvatar.addEventListener("click", () => {
+    avatarInput.click();
+  });
+
+  avatarInput.addEventListener("change", () => {
+    const file = avatarInput.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      profileAvatar.src = e.target.result;
+
+      let currentUser = JSON.parse(localStorage.getItem(CURRENT_KEY));
+      if (currentUser) {
+        currentUser.avatar = e.target.result;
+        localStorage.setItem(CURRENT_KEY, JSON.stringify(currentUser));
+
+        let users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+        const idx = users.findIndex(u => u.email === currentUser.email);
+        if (idx !== -1) {
+          users[idx].avatar = e.target.result;
+          localStorage.setItem(USERS_KEY, JSON.stringify(users));
+        }
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // ================== EDIT PROFILE ===================
+
+  editProfileBtn.addEventListener("click", () => {
+    const user = JSON.parse(localStorage.getItem(CURRENT_KEY));
+    if (!user) return;
+
+    nameInput.value = user.name || "";
+    emailInput.value = user.email || "";
+    photoInput.value = user.avatar || "";
+
+    editModal.style.display = "block";
+  });
+
+  closeBtn.onclick = () => {
+    editModal.style.display = "none";
+  };
+
+  window.onclick = (e) => {
+    if (e.target === editModal) {
+      editModal.style.display = "none";
+    }
+  };
+
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const avatar = photoInput.value.trim();
+
+    if (!name || !email) {
+      alert("Ім’я та email обов’язкові.");
       return;
     }
 
-    const updatedProfile = {
-      ...JSON.parse(localStorage.getItem(PROFILE_KEY)),
-      name: newName,
-      email: newEmail,
-      phone: newPhone
-    };
+    let currentUser = JSON.parse(localStorage.getItem(CURRENT_KEY));
+    if (!currentUser) return;
 
-    localStorage.setItem(PROFILE_KEY, JSON.stringify(updatedProfile));
-    localStorage.setItem(USER_KEY, JSON.stringify(updatedProfile));
-    showProfile(updatedProfile);
-    editPopup.style.display = "none";
-  });
+    currentUser.name = name;
+    currentUser.email = email;
+    currentUser.avatar = avatar;
 
-  checkLoggedIn();
-});
+    // update profile
+    profileName.textContent = name;
+    profileEmail.textContent = email;
+    if (avatar) profileAvatar.src = avatar;
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("editModal");
-    const btn = document.getElementById("editBtn");
-    const closeBtn = document.querySelector(".close");
-    const form = document.getElementById("editForm");
+    // update storage
+    localStorage.setItem(CURRENT_KEY, JSON.stringify(currentUser));
 
-    btn.onclick = () => modal.style.display = "block";
-    closeBtn.onclick = () => modal.style.display = "none";
-
-    window.onclick = (e) => {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
+    let users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+    const idx = users.findIndex(u => u.email === currentUser.email);
+    if (idx !== -1) {
+      users[idx] = currentUser;
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
     }
 
-    form.onsubmit = (e) => {
-      e.preventDefault();
-      const name = document.getElementById("nameInput").value;
-      const email = document.getElementById("emailInput").value;
-      const photo = document.getElementById("photoInput").value;
+    editModal.style.display = "none";
+  };
 
-      console.log("Name:", name);
-      console.log("Email:", email);
-      console.log("Photo URL:", photo);
-
-      // Тут можна оновити DOM або зберегти в localStorage
-      modal.style.display = "none";
-    };
-  });
-
-
-
+  checkLogin();
+});
