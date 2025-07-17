@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const USERS_KEY = "accounts";
   const CURRENT_KEY = "activeUser";
 
+  // ========== AUTH & PROFILE ELEMENTS ==========
   const authSection = document.getElementById("auth-section");
   const profileSection = document.getElementById("profile-section");
   const authTitle = document.getElementById("auth-title");
@@ -29,15 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const editProfileBtn = document.getElementById("editProfileBtn");
   const logoutBtn = document.getElementById("logoutBtn");
 
+  // ========== EDIT MODAL ==========
   const editModal = document.getElementById("editModal");
   const closeBtn = document.querySelector(".close");
+  const cancelEditBtn = document.getElementById("cancelEditBtn");
   const form = document.getElementById("editForm");
   const nameInput = document.getElementById("nameInput");
   const emailInput = document.getElementById("emailInput");
   const photoInput = document.getElementById("photoInput");
 
-  // ================== AUTH ===================
-
+  // ================== VALIDATION ===================
   function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
@@ -48,15 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
     return re.test(phone);
   }
 
+  // ================== SHOW PROFILE ===================
   function showProfile(user) {
     authSection.style.display = "none";
     profileSection.style.display = "block";
-
     profileName.textContent = user.name || "Користувач";
     profileEmail.textContent = user.email || "";
     profilePhone.textContent = user.phone || "Не вказано";
     profileJoined.textContent = user.joined || new Date().toLocaleDateString();
-
     profileAvatar.src = user.avatar || "./img/user-avatar.png";
   }
 
@@ -68,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loginEmailInput.value = "";
     loginPasswordInput.value = "";
     registerForm.style.display = "none";
-
     loginEmailInput.style.display = "block";
     loginPasswordInput.style.display = "block";
     loginBtn.style.display = "block";
@@ -86,17 +86,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ================== LOGIN ===================
   loginBtn.addEventListener("click", () => {
     authError.textContent = "";
     const email = loginEmailInput.value.trim().toLowerCase();
     const password = loginPasswordInput.value;
-
     if (!email) return (authError.textContent = "Email не може бути порожнім.");
     if (!validateEmail(email)) return (authError.textContent = "Некоректний email.");
     if (!password) return (authError.textContent = "Пароль не може бути порожнім.");
 
     let users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
-    const user = users.find(u => u.email === email && u.password === password);
+    const user = users.find((u) => u.email === email && u.password === password);
 
     if (user) {
       localStorage.setItem(CURRENT_KEY, JSON.stringify(user));
@@ -106,9 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // ================== REGISTER ===================
   registerBtn.addEventListener("click", () => {
     authError.textContent = "";
-
     const name = regNameInput.value.trim();
     const email = regEmailInput.value.trim().toLowerCase();
     const password = regPasswordInput.value;
@@ -123,8 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (phone && !validatePhone(phone)) return (authError.textContent = "Некоректний телефон.");
 
     let users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
-
-    if (users.find(u => u.email === email)) {
+    if (users.find((u) => u.email === email)) {
       return (authError.textContent = "Користувач з таким email вже існує.");
     }
 
@@ -149,11 +148,13 @@ document.addEventListener("DOMContentLoaded", () => {
     showAuth();
   });
 
+  // ================== LOGOUT ===================
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem(CURRENT_KEY);
     showAuth();
   });
 
+  // ================== AVATAR UPLOAD ===================
   profileAvatar.addEventListener("click", () => {
     avatarInput.click();
   });
@@ -164,14 +165,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const reader = new FileReader();
     reader.onload = function (e) {
       profileAvatar.src = e.target.result;
-
       let currentUser = JSON.parse(localStorage.getItem(CURRENT_KEY));
       if (currentUser) {
         currentUser.avatar = e.target.result;
         localStorage.setItem(CURRENT_KEY, JSON.stringify(currentUser));
-
         let users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
-        const idx = users.findIndex(u => u.email === currentUser.email);
+        const idx = users.findIndex((u) => u.email === currentUser.email);
         if (idx !== -1) {
           users[idx].avatar = e.target.result;
           localStorage.setItem(USERS_KEY, JSON.stringify(users));
@@ -182,34 +181,34 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ================== EDIT PROFILE ===================
-
   editProfileBtn.addEventListener("click", () => {
     const user = JSON.parse(localStorage.getItem(CURRENT_KEY));
     if (!user) return;
-
     nameInput.value = user.name || "";
     emailInput.value = user.email || "";
     photoInput.value = user.avatar || "";
-
-    editModal.style.display = "block";
+    editModal.style.display = "block"; // показуємо модалку
   });
 
   closeBtn.onclick = () => {
     editModal.style.display = "none";
   };
 
-  window.onclick = (e) => {
+  cancelEditBtn.addEventListener("click", () => {
+    editModal.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
     if (e.target === editModal) {
       editModal.style.display = "none";
     }
-  };
+  });
 
-  form.onsubmit = (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const avatar = photoInput.value.trim();
-
     if (!name || !email) {
       alert("Ім’я та email обов’язкові.");
       return;
@@ -220,25 +219,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     currentUser.name = name;
     currentUser.email = email;
-    currentUser.avatar = avatar;
+    if (avatar) currentUser.avatar = avatar;
 
-    // update profile
+    // update profile visually
     profileName.textContent = name;
     profileEmail.textContent = email;
     if (avatar) profileAvatar.src = avatar;
 
     // update storage
     localStorage.setItem(CURRENT_KEY, JSON.stringify(currentUser));
-
     let users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
-    const idx = users.findIndex(u => u.email === currentUser.email);
+    const idx = users.findIndex((u) => u.email === currentUser.email);
     if (idx !== -1) {
       users[idx] = currentUser;
       localStorage.setItem(USERS_KEY, JSON.stringify(users));
     }
 
     editModal.style.display = "none";
-  };
+  });
 
+  // ================== INIT ===================
   checkLogin();
 });
