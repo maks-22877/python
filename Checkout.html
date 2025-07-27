@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation | Food Boutique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div id="confetti-container" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
+    
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-6 text-center">
+                <h1 class="text-3xl font-bold text-white">Order Confirmed!</h1>
+                <p class="text-white mt-2">Thank you for your purchase</p>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="p-6 md:p-8">
+                <div class="flex flex-col items-center justify-center mb-8">
+                    <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-check-circle text-5xl text-green-600 pulse-check"></i>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-800">Your order is complete</h2>
+                    <p class="text-gray-600 mt-2 text-center">We've sent a confirmation email with your order details</p>
+                </div>
+                
+                <!-- Order Summary -->
+                <div class="border border-gray-200 rounded-lg p-6 mb-8">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Order Summary</h3>
+                    
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Order Number</span>
+                        <span class="font-medium" id="order-number">#ORD-2023-05678</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Date</span>
+                        <span class="font-medium" id="order-date">June 15, 2023</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Total</span>
+                        <span class="font-medium" id="order-total">$129.99</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Payment Method</span>
+                        <span class="font-medium" id="payment-method">Credit Card</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Contact Email</span>
+                        <span class="font-medium text-right" id="contact-email">user@example.com</span>
+                    </div>
+                </div>
+                
+                <!-- Order Items -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Items Ordered</h3>
+
+                    <div class="space-y-4" id="order-items-container">
+                        <!-- Items will be dynamically inserted here -->
+                    </div>
+                    
+                    <!-- Order Totals -->
+                    <div class="mt-6 border-t border-gray-200 pt-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span class="font-medium" id="order-subtotal">$129.99</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Shipping</span>
+                            <span class="font-medium">$0.00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Tax</span>
+                            <span class="font-medium" id="order-tax">$10.40</span>
+                        </div>
+                        <div class="flex justify-between text-lg font-bold mt-4">
+                            <span>Total</span>
+                            <span id="order-grand-total">$140.39</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Next Steps -->
+                <div class="bg-blue-50 rounded-lg p-6 mb-8">
+                    <h3 class="text-lg font-medium text-gray-900 mb-3">What's next?</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-truck text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Track your order</h4>
+                                <p class="text-gray-600 mt-1">We'll notify you when your items ship. Expected delivery: June 18-20</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Check your email</h4>
+                                <p class="text-gray-600 mt-1">We've sent your order confirmation and receipt to your email address</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="index.html" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 px-6 rounded-lg text-center transition duration-200 animate-bounce-custom">
+                        Continue Shopping
+                    </a>
+                    <a href="#" class="flex-1 border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 px-6 rounded-lg text-center transition duration-200">
+                        View Order Details
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                <p class="text-center text-gray-600 text-sm">
+                    Need help? <a href="#" class="text-emerald-600 hover:text-emerald-700 font-medium">Contact us</a> or call (123) 456-7890
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const cartData = urlParams.get('cartData');
+            const total = urlParams.get('total');
+            const email = urlParams.get('email');
+
+            // Parse cart data
+            let items = [];
+            try {
+                items = JSON.parse(decodeURIComponent(cartData)) || [];
+            } catch (e) {
+                console.error('Error parsing cart data:', e);
+            }
+
+            // Generate random order number
+            const randomNum = Math.floor(Math.random() * 90000) + 10000;
+            document.getElementById('order-number').textContent = `#ORD-${new Date().getFullYear()}-${randomNum}`;
+
+            // Set current date
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date();
+            document.getElementById('order-date').textContent = today.toLocaleDateString('en-US', options);
+
+            // Set contact email
+            if (email) {
+                document.getElementById('contact-email').textContent = email;
+            }
+
+            // Calculate subtotal from items
+            let subtotal = 0;
+            const itemsContainer = document.getElementById('order-items-container');
+
+            if (items.length > 0) {
+                items.forEach(item => {
+                    // Calculate item total
+                    const price = parseFloat(item.price.replace('$', '')) || 0;
+                    const quantity = parseInt(item.quantity) || 1;
+                    const itemTotal = price * quantity;
+                    subtotal += itemTotal;
+
+                    // Create item element
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'flex items-start border-b border-gray-200 pb-4';
+                    itemElement.innerHTML = `
+                        <img src="${item.image || 'https://via.placeholder.com/80'}" alt="${item.name}" class="w-20 h-20 object-cover rounded-md mr-4">
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-900">${item.name}</h4>
+                            <p class="text-gray-600 text-sm">Price: ${item.price}</p>
+                            <p class="text-gray-600 text-sm">Quantity: ${quantity}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium">$${(itemTotal).toFixed(2)}</p>
+                        </div>
+                    `;
+                    itemsContainer.appendChild(itemElement);
+                });
+            } else {
+                // Fallback if no items (shouldn't happen normally)
+                itemsContainer.innerHTML = '<p class="text-gray-600">No items in order</p>';
+                subtotal = parseFloat(total.replace('$', '')) || 0;
+            }
+
+            // Set order totals
+            document.getElementById('order-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('order-total').textContent = `$${subtotal.toFixed(2)}`;
+
+            // Calculate tax (10% for example)
+            const tax = subtotal * 0.1;
+            document.getElementById('order-tax').textContent = `$${tax.toFixed(2)}`;
+
+            // Set grand total
+            const grandTotal = subtotal + tax;
+            document.getElementById('order-grand-total').textContent = `$${grandTotal.toFixed(2)}`;
+
+            // Create confetti effect
+            createConfetti();
+        });
+
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                const size = Math.random() * 8 + 4;
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+
+                container.appendChild(confetti);
+
+                animateConfetti(confetti);
+            }
+        }
+
+        function animateConfetti(element) {
+            const duration = Math.random() * 3 + 2;
+            const delay = Math.random() * 5;
+
+            element.style.animation = `fall ${duration}s linear ${delay}s forwards`;
+
+            // Create keyframes for animation
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes fall {
+                    0% {
+                        transform: translateY(0) rotate(0deg);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>
